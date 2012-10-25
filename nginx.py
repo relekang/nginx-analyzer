@@ -1,5 +1,12 @@
 import re, sys
 from utils import print_with_color
+
+DETAILS_STATUS = [
+    '404',
+    '500',
+]
+
+
 class NginxUtil:
     re = ' '.join([
         '(\d+\.\d+\.\d+\.\d+)',
@@ -30,7 +37,7 @@ class NginxUtil:
             else:
                 self.stats['status_codes'][status] = 1
             
-            if status != '200':
+            if status in DETAILS_STATUS:
                 label = '%s_details' % status
                 url = re.search('[A-Z]+ (.*) ', s.group(3)).group(1)
 
